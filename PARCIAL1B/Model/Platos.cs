@@ -9,7 +9,7 @@ namespace PARCIAL1B.Model
 
         [Key]
 
-        public int PlatoID { get; set; }
+        public int PlatosID { get; set; }
 
         public int EmpresaID { get; set; }
 
@@ -17,7 +17,7 @@ namespace PARCIAL1B.Model
 
         public string NombrePlato { get; set;}
     
-        public string DescripcionPlato { get; set; }
+        public string? DescripcionPlato { get; set; }
     
         public decimal Precio {  get; set; }
     }

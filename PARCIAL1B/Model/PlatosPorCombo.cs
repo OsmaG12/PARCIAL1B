@@ -8,9 +8,9 @@ namespace PARCIAL1B.Model
 
         public int PlatosPorComboID { get; set; }
         public int EmpresaID { get; set; }
-
+        public int ComboID { get; set; }
         public int PlatoID { get; set; }
-        public string Estado { get; set; }
+        public string? Estado { get; set; }
 
         
     }

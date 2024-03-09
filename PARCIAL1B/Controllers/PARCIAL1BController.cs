@@ -17,6 +17,7 @@ namespace PARCIAL1B.Controllers
             _pContex = pContexto;
         }
 
+        //Leer la tabla platos
         [HttpGet]
         [Route("GetAll")]
 
@@ -32,6 +33,7 @@ namespace PARCIAL1B.Controllers
 
             return Ok(ListadoPlatos);
         }
+        //Fin de leer platos
 
         //Crear para Platos
         [HttpPost]
@@ -57,14 +59,14 @@ namespace PARCIAL1B.Controllers
         public IActionResult ActualizarPlato(int id, [FromBody] Platos platoModificar)
         {
             Platos? platoActual = (from p in _pContex.platos
-                                   where p.PlatoID == id
+                                   where p.PlatosID == id
                                    select p).FirstOrDefault();
             if (platoActual == null)
             {
                 return NotFound();
             }
 
-            platoActual.PlatoID = platoModificar.PlatoID;
+            platoActual.PlatosID = platoModificar.PlatosID;
             platoActual.EmpresaID = platoModificar.EmpresaID;
             platoActual.GrupoID = platoModificar.GrupoID;
             platoActual.NombrePlato = platoModificar.NombrePlato;
@@ -84,7 +86,7 @@ namespace PARCIAL1B.Controllers
         public IActionResult EliminarPlato(int id)
         {
             Platos? plato = (from p in _pContex.platos
-                             where p.PlatoID == id
+                             where p.PlatosID == id
                              select p).FirstOrDefault();
             if (plato == null)
             {
