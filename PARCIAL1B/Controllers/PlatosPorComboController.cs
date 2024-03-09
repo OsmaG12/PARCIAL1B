@@ -34,5 +34,23 @@ namespace PARCIAL1B.Controllers
             return Ok(ListadoPlatosPC);
         }
         //Fin de leer platos por combo
+
+        //Crear para Platos
+        [HttpPost]
+        [Route("AddPlatosPorCombo")]
+        public IActionResult GuardarPlatoPorCombo([FromBody] PlatosPorCombo platopc)
+        {
+            try
+            {
+                _pContex.platos.Add(platopc);
+                _pContex.SaveChanges();
+                return Ok(platopc);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+        //Fin de crear para platos
     }
 }
