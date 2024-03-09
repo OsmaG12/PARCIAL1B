@@ -32,6 +32,24 @@ namespace PARCIAL1B.Controllers
             return Ok(ListadoPlatos);
         }
 
+        //Crear para Platos
+        [HttpPost]
+        [Route("AddPlatos")]
+        public IActionResult GuardarPlato([FromBody] Platos plato)
+        {
+            try
+            {
+                _pContex.platos.Add(plato);
+                _pContex.SaveChanges();
+                return Ok(plato);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+        //Fin de crear para platos
+
 
     }
 }
