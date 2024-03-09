@@ -11,9 +11,9 @@ namespace PARCIAL1B.Model
         }
 
         public DbSet<Platos> platos { get; set; }
-        public DbSet<PlatosPorCombo> platosPC { get; set; }
+        public DbSet<PlatosPorCombo> platosporcombo { get; set; }
         public DbSet<Elementos> elementos { get; set; }
-        public DbSet<ElementosPorPlato> elementosPP { get; set; }
+        public DbSet<ElementosPorPlato> elementosporplato { get; set; }
 
     }
 

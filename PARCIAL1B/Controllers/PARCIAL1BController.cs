@@ -99,7 +99,6 @@ namespace PARCIAL1B.Controllers
 
             return Ok(plato);
             //Fin de borrar platos
-
         }
     }
 }
