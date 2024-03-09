@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PARCIAL1B.Model;
 
 namespace PARCIAL1B.Controllers
@@ -15,6 +16,8 @@ namespace PARCIAL1B.Controllers
         {
             _pContex = pContexto;
         }
+
+        //Leer Tablas
 
         [HttpGet]
         [Route("GetAll")]
@@ -32,14 +35,13 @@ namespace PARCIAL1B.Controllers
             return Ok(ListadoElementos);
         }
 
-        ///agregar
+        //agregar
 
         [HttpGet]
-        [Route("Add")]
+        [Route("AddElementos")]
 
         public IActionResult GuardarElementos([FromBody] Elementos elementosAregar)
         {
-
             try
             {
                 _pContex.elementos.Add(elementosAregar);
@@ -50,9 +52,32 @@ namespace PARCIAL1B.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
 
+        //Modificar 
+        [HttpPut]
+        [Route("ActualizarElementos/{id}")]
+        public IActionResult ActualizarElementos(int id, [FromBody] Elementos elementosModificar)
+        {
+            Elementos? elementoActual = (from e in _pContex.elementos
+                                         where e.ElementoID == id
+                                         select e).FirstOrDefault();
+            if (elementoActual == null)
+            {
+                return NotFound();
+            }
 
+            elementoActual.EmpresaID = elementosModificar.EmpresaID;
+            elementoActual.Elemento = elementosModificar.Elemento;
+            elementoActual.CantidadMinima = elementosModificar.CantidadMinima;
+            elementoActual.UnidadMedida = elementosModificar.UnidadMedida;
+            elementoActual.Costo = elementosModificar.Costo;
+            elementoActual.Estado = elementosModificar.Estado;
 
+            _pContex.Entry(elementoActual).State = EntityState.Modified;
+            _pContex.SaveChanges();
+
+            return Ok(elementosModificar);
         }
 
 
@@ -61,7 +86,7 @@ namespace PARCIAL1B.Controllers
         [HttpDelete]
         [Route("eliminar/{id}")]
 
-        public IActionResult EliminarEquipo(int id)
+        public IActionResult EliminarElemento(int id)
         {
             Elementos elementos = (from e in _pContex.elementos
                                where e.ElementoID == id
